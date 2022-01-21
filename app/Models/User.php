@@ -18,10 +18,16 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    const DEFAULT = 1;
+    const MODERATOR = 2;
+    const ADMIN = 3;
+
+    protected $table = 'users';
+
     /**
      * The attributes that are mass assignable.
      *
-     * @var string[]
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -30,7 +36,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
      * @var array
      */
@@ -42,7 +48,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
@@ -58,4 +64,19 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function type(): int
+    {
+        return (int) $this->type;
+    }
+
+    public function isModerator(): bool
+    {
+        return $this->type() === self::MODERATOR;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->type() === self::ADMIN;
+    }
 }
