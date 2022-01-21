@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <x-partials.head />
-</head>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<body class="bg-gray-100">
+        <title>{{ config('app.name', 'Laravel') }}</title>
 
-    {{-- Header --}}
-    <header class="relative flex items-center justify-center h-40 bg-blue-500">
-        <img class="absolute z-10 object-cover w-full h-40 opacity-10" src="{{ asset('img/bg/bg-header.jpg') }}" alt="">
-        <h2 class="z-50 text-4xl font-bold text-gray-200">Welcome to the community</h2>
-    </header>
+        <!-- Fonts -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-    {{-- Navbar --}}
-    <x-partials.nav />
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-    {{-- Slot --}}
-    <div class="mb-8 font-sans antialiased text-gray-900">
-        {{ $slot }}
-    </div>
-
-    {{-- Footer --}}
-    <x-partials.footer />
-
-    <livewire:scripts />
-    @bukScripts(true)
-</body>
-
+        <!-- Scripts -->
+        <script src="{{ mix('js/app.js') }}" defer></script>
+    </head>
+    <body>
+        <div class="font-sans text-gray-900 antialiased">
+            {{ $slot }}
+        </div>
+    </body>
 </html>
